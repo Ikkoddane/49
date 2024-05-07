@@ -24,13 +24,43 @@ class Deck {
     }
 
     shuffle() {
-        for (let i = this.cards.length - 1; i > 0; i--){
+        for (let i = this.cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [this.cards[i], this.cards] = [this.cards[j], this.cards[i]]
         }
     }
 
-    takeCard(){
+    takeCard() {
         return this.cards.pop()
+    }
+}
+
+class Hand {
+    constructor() {
+        this.cards = [];
+    }
+
+    takeCard(card) {
+        if (this.cards.length < 5) {
+            this.cards.push(card);
+            console.log(`You've taken card ${card}`)
+        } else {
+            console.log(`You already have 5 cards!`)
+        }
+    }
+
+    showCards() {
+        this.cards.forEach((card, index) => {
+            console.log(`${index + 1}: ${card.suit}${card.suit}`)
+        })
+    }
+
+    replaceCard(index, newCard) {
+        if (index >= 1 && index <= 5){
+            this.cards[index - 1] = newCard;
+            console.log(`You've changed card with index ${index} for ${newCard.suit}${newCard.rank}`)
+        } else{
+            console.log('Card index has to be from 1 to 5')
+        }
     }
 }
